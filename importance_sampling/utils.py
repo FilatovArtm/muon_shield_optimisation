@@ -15,6 +15,7 @@ from .disney_oneshot import (
 from config import JOB_TEMPLATE_IMP_SAMPLING
 from .result_collector.config import JOB_TEMPLATE as JOB_COLLECTOR_TEMPLATE
 
+
 def CreateSimulationJobInput(point, sampling, seed, point_id, share, tag):
     job = copy.deepcopy(JOB_TEMPLATE_IMP_SAMPLING)
     job['container']['cmd'] = \
@@ -30,6 +31,7 @@ def CreateSimulationJobInput(point, sampling, seed, point_id, share, tag):
         )
 
     return json.dumps(job)
+
 
 def CreateCollectorJobInput(tag):
     job = copy.deepcopy(JOB_COLLECTOR_TEMPLATE)
@@ -49,6 +51,7 @@ def SubmitDockerJobs(point, tag, sampling, seed, point_id, share, tag):
             metadata=CreateMetaData(point, tag, sampling=sampling, seed=seed)
         ))
         ]
+
 
 def ProcessJob(job, space, tag):
     if json.loads(job[0].metadata)['user']['tag'] == tag:
@@ -116,13 +119,15 @@ def WaitCompleteness(jobs):
 
             return completed_jobs
 
-def CollectResult(tag):
+
+def CollectResults(tag):
     job_input = CreateCollectorJobInput(tag)
     job = stub.CreateJob(Job(
         input=job_input,
         kind='docker'
     ))
     WaitCompleteness([job])
+
 
 def ConvertToPoints(disney_points, tag):
     X = []

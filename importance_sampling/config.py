@@ -5,7 +5,7 @@ SLEEP_TIME = 60
 
 JOB_TEMPLATE_IMP_SAMPLING = {
     'input': ['eos:/eos/experiment/ship/skygrid/importance_sampling',
-              'eos:/eos/experiment/ship/data/Mbias/'\
+              'eos:/eos/experiment/ship/data/Mbias/'
               'pythia8_Geant4-withCharm_onlyMuons_4magTarget.root'],
 
     'container': {
@@ -26,7 +26,7 @@ JOB_TEMPLATE_IMP_SAMPLING = {
         'run_id':
         'near_run3',
         'cmd':
-        '''python2 /code/weighter.py '''
+        '''python2 /code/weighter/weighter.py '''
         '''--params {params} '''
         '''--results /output/result.json '''
         '''--hists /output/hists_{IMAGE_TAG}_'''

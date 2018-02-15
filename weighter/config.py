@@ -21,7 +21,7 @@ JOB_TEMPLATE = {
         'run_id':
         'near_run3',
         'cmd':
-        '''python2 /code/result_collector/aggregate_results.py '''
+        '''python2 /code/weighter/aggregate_results.py '''
         '''--tag {tag}''',
     },
     'required_outputs': {

@@ -1,13 +1,19 @@
 import numpy as np
 import re
+import os
+import argparse
+from utils import get_xs_path, loss, get_indeces_path
+
 
 def get_number(filename):
     return re.findall(r'\d+', filename)[0]
+
 
 def load_previous_cumulative_arrays():
     cum_loss = np.load("/input/cumloss.npy")
     cum_indeces = np.load("/input/cumindeces.npy")
     return cum_loss, cum_indeces
+
 
 def load_previous_results(tag):
     '''
@@ -28,6 +34,7 @@ def load_previous_results(tag):
 
     return prev_results, prev_indeces
 
+
 def calculate_cuminfo(muon_loss, muon_indeces, old_cumloss, old_cumindeces):
     '''
     Function accumulates new results.
@@ -40,6 +47,7 @@ def calculate_cuminfo(muon_loss, muon_indeces, old_cumloss, old_cumindeces):
         cum_indeces[muon_indeces[i]] += 1
 
     return cum_loss, cum_indeces
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -54,5 +62,6 @@ def main():
     np.save("/output/cumloss.npy", cum_loss)
     np.save("/output/cumindeces.npy", cum_indeces)
 
-if __main__ == "__name__":
+
+if __name__ == "__main__":
     main()
