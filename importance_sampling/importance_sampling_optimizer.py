@@ -2,7 +2,7 @@
 import argparse
 import pickle
 
-from .disney_common import (AddFixedParams, CreateDiscreteSpace, StripFixedParams)
+from muon_shield_optimisation.disney_common import (AddFixedParams, CreateDiscreteSpace, StripFixedParams)
 from config import POINTS_IN_BATCH
 
 from utils import (WaitCompleteness, ProcessJobs, ConvertToPoints, CollectResults, SubmitDockerJobs)
