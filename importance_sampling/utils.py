@@ -104,7 +104,7 @@ def WaitCompleteness(stub, jobs):
         ]
         jobs_completed = [job.status
                           in STATUS_FINAL
-                          for point in uncompleted_jobs
+                          for point in jobs
                           for job in point]
 
         if all(jobs_completed):
@@ -128,7 +128,7 @@ def CollectResults(stub, tag):
         input=job_input,
         kind='docker'
     ))
-    WaitCompleteness(stub, [job])
+    WaitCompleteness(stub, [[job]])
 
 
 def ConvertToPoints(disney_points, tag):
