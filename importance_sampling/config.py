@@ -28,12 +28,13 @@ JOB_TEMPLATE_IMP_SAMPLING = {
         'run_id':
         'near_run3',
         'cmd':
+        '''/bin/bash -l -c 'source /opt/FairShipRun/config.sh; '''
         '''python2 /code/weighter/weighter.py '''
         '''--params {params} '''
         '''--results /output/result.json '''
         '''--hists /output/hists_{IMAGE_TAG}_'''
-        '''{params}_{job_id}_{sampling}_{seed}.root --seed {seed}' '''
-        '''--share_muons {share} --tag {tag} --point_id {point_id}''',
+        '''{params}_{job_id}_{sampling}_{seed}.root --seed {seed} '''
+        '''--share_muons {share} --tag {tag} --point_id {point_id}' ''',
     },
     'required_outputs': {
         'output_uri': 'eos:/eos/experiment/ship/skygrid/importance_sampling',
