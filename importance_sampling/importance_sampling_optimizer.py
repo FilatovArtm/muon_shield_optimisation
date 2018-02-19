@@ -54,15 +54,15 @@ def main():
 
         shield_jobs = []
         for j in range(len(points)):
-            SubmitDockerJobs(points[j], tag, sampling='IS', seed=1, point_id=j, share=0.05, tag="impsampl")
+            SubmitDockerJobs(stub, points[j], tag, sampling='IS', seed=1, point_id=j, share=0.05, tag="impsampl")
 
-        shield_jobs = WaitCompleteness(shield_jobs)
-        X_new, y_new = ProcessJobs(shield_jobs, space, tag)
+        shield_jobs = WaitCompleteness(stub, shield_jobs)
+        X_new, y_new = ProcessJobs(stub, shield_jobs, space, tag)
 
         print('Received new points ', X_new, y_new)
         X_new = [StripFixedParams(point) for point in X_new]
         result = clf.tell(X_new, y_new)
-        CollectResults("impsampl")
+        CollectResults(stub, "impsampl")
 
         with open('optimiser.pkl', 'wb') as f:
             pickle.dump(clf, f)

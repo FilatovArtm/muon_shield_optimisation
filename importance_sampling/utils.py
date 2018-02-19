@@ -43,7 +43,7 @@ def CreateCollectorJobInput(tag):
     return json.dumps(job)
 
 
-def SubmitDockerJobs(point, user_tag, sampling, seed, point_id, share, tag):
+def SubmitDockerJobs(stub, point, user_tag, sampling, seed, point_id, share, tag):
     return [
         stub.CreateJob(Job(
             input=CreateSimulationJobInput(point, sampling, seed, point_id, share, tag),
@@ -53,7 +53,7 @@ def SubmitDockerJobs(point, user_tag, sampling, seed, point_id, share, tag):
         ]
 
 
-def ProcessJob(job, space, tag):
+def ProcessJob(stub, job, space, tag):
     if json.loads(job[0].metadata)['user']['tag'] == tag:
         try:
             weight, length, _, muons_w = get_result(job)
@@ -73,10 +73,10 @@ def ProcessJob(job, space, tag):
             print(e)
 
 
-def ProcessJobs(jobs, space, tag):
+def ProcessJobs(stub, jobs, space, tag):
     print("[{}] Processing jobs...".format(time.time()))
     results = [
-        ProcessJob(job, space, tag)
+        ProcessJob(stub, job, space, tag)
         for job in jobs
     ]
     print(f"Got results {results}")
@@ -87,7 +87,7 @@ def ProcessJobs(jobs, space, tag):
         return [], []
 
 
-def WaitCompleteness(jobs):
+def WaitCompleteness(stub, jobs):
     work_time = 0
     while True:
         time.sleep(SLEEP_TIME)
@@ -120,13 +120,13 @@ def WaitCompleteness(jobs):
             return completed_jobs
 
 
-def CollectResults(tag):
+def CollectResults(stub, tag):
     job_input = CreateCollectorJobInput(tag)
     job = stub.CreateJob(Job(
         input=job_input,
         kind='docker'
     ))
-    WaitCompleteness([job])
+    WaitCompleteness(stub, [job])
 
 
 def ConvertToPoints(disney_points, tag):
