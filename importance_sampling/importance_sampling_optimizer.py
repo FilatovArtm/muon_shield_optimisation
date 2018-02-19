@@ -27,7 +27,7 @@ def main():
         type=int
     )
     args = parser.parse_args()
-    tag = "important_sampling_{args.opt}_{args.tag}".format(**args)
+    tag = "important_sampling_{args.opt}_{args.tag}".format(**vars(args))
     print(tag)
 
     space = CreateDiscreteSpace()
