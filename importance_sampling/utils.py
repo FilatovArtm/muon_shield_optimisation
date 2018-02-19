@@ -14,7 +14,7 @@ from muon_shield_optimisation.disney_oneshot import (
 
 from disneylandClient import (Job, RequestWithId, ListJobsRequest)
 
-from config import JOB_TEMPLATE_IMP_SAMPLING
+from config import JOB_TEMPLATE_IMP_SAMPLING, IMAGE_TAG
 from muon_shield_optimisation.weighter.config import JOB_TEMPLATE as JOB_COLLECTOR_TEMPLATE
 
 
