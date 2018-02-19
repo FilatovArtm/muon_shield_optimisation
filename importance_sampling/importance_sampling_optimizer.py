@@ -54,9 +54,10 @@ def main():
 
         shield_jobs = []
         for j in range(len(points)):
-            SubmitDockerJobs(stub, points[j], tag, sampling='IS', seed=1, point_id=j, share=0.05, tag="impsampl")
+           shield_jobs.append([SubmitDockerJobs(stub, points[j], tag, sampling='IS', seed=1, point_id=j, share=0.05, tag="impsampl")])
 
         shield_jobs = WaitCompleteness(stub, shield_jobs)
+        print(shield_jobs[0][0].metadata)
         X_new, y_new = ProcessJobs(stub, shield_jobs, space, tag)
 
         print('Received new points ', X_new, y_new)
