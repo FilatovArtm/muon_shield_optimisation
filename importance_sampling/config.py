@@ -1,7 +1,8 @@
 
 IMAGE = 'olantwin/ship-shield'
-IMAGE_TAG = 20180215
+IMAGE_TAG = 20180216.1
 SLEEP_TIME = 60
+POINTS_IN_BATCH = 1
 
 JOB_TEMPLATE_IMP_SAMPLING = {
     'input': ['eos:/eos/experiment/ship/skygrid/importance_sampling',
