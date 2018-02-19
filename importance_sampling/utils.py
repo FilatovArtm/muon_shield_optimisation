@@ -4,7 +4,7 @@ import json
 import copy
 import time
 
-from .disney_oneshot import (
+from muon_shield_optimisation.disney_oneshot import (
     get_result,
     CreateMetaData,
     ExtractParams,
@@ -13,7 +13,7 @@ from .disney_oneshot import (
 )
 
 from config import JOB_TEMPLATE_IMP_SAMPLING
-from .result_collector.config import JOB_TEMPLATE as JOB_COLLECTOR_TEMPLATE
+from muon_shield_optimisation.weighter.config import JOB_TEMPLATE as JOB_COLLECTOR_TEMPLATE
 
 
 def CreateSimulationJobInput(point, sampling, seed, point_id, share, tag):
